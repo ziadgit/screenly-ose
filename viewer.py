@@ -33,11 +33,8 @@ SCREENLY_HTML = '/tmp/screenly_html/'
 UZBL = '/tmp/uzbl_socket_'
 
 last_settings_refresh = None
-load_screen_pid = None
-load_screen_visible = True
 is_pro_init = None
 current_browser_url = None
-
 
 
 def send_to_front(name):
@@ -278,15 +275,6 @@ def view_web(url, duration):
     sleep(int(duration))
 
 
-def start_load_screen():
-    """Toggle the load screen. Set status to either True or False."""
-    load_screen = HOME + '/screenly/loading.jpg'
-    logging.info('showing load screen %s', load_screen)
-    feh = sh.feh(load_screen, scale_down=True, borderless=True, fullscreen=True, _bg=True)
-    send_to_front('feh')
-    return feh
-
-
 def check_update():
     """
     Check if there is a later version of Screenly-OSE
@@ -365,7 +353,7 @@ if __name__ == "__main__":
     libx11 = cdll.LoadLibrary('libX11.so')
     HOME = getenv('HOME', '/home/pi')
 
-    start_load_screen()
+    send_to_front('feh')
 
     signal.signal(signal.SIGUSR1, sigusr1)
     signal.signal(signal.SIGUSR2, sigusr2)
@@ -379,7 +367,6 @@ if __name__ == "__main__":
     pro_intro_file = cond_pro_init()
 
     if is_pro_init:
-        load_screen_visible = False
         current_browser_url = pro_intro_file
     elif settings['show_splash']:
         current_browser_url = 'http://{0}:{1}/splash_page'.format(settings.get_listen_ip(), settings.get_listen_port())
