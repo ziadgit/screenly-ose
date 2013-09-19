@@ -283,6 +283,7 @@ def start_load_screen():
     load_screen = HOME + '/screenly/loading.jpg'
     logging.info('showing load screen %s', load_screen)
     feh = sh.feh(load_screen, scale_down=True, borderless=True, fullscreen=True, _bg=True)
+    send_to_front('feh')
     return feh
 
 
