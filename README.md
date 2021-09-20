@@ -23,4 +23,6 @@ To learn more about Screenly, please visit the official website at [ScreenlyApp.
 ## Running the Unit Tests
 
     nosetests --with-doctest
+## Distributed Ledger Technology
 
+* Something like but also different from a bloomberg terminal for DLT would be cool
